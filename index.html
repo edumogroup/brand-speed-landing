@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAND SPEED - Có Bộ Thương Hiệu + Website Chuyên Nghiệp Trong 14 Ngày | Hoàng Quốc Huynh</title>
+  <meta name="description" content="Chương trình BRAND SPEED giúp chủ doanh nghiệp nhỏ và coach tại Việt Nam có bộ thương hiệu + website chuyên nghiệp trong 14 ngày, có chuyên gia 12 năm kinh nghiệm đồng hành trực tiếp — không cần biết công nghệ. Founding Cohort chỉ 9 suất.">
+  <meta property="og:title" content="BRAND SPEED — Founding Cohort chỉ 9 suất">
+  <meta property="og:description" content="Có bộ thương hiệu + website chuyên nghiệp trong 14 ngày, có chuyên gia 12 năm kinh nghiệm đồng hành trực tiếp — không cần biết công nghệ.">
+  <meta property="og:image" content="">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230B1B2B'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle' fill='%23F59E0B' font-family='Georgia,serif'%3EB%3C/text%3E%3C/svg%3E">
+
+  <!-- TEMPLATE BASE: Minimal Clean (#3) — high-ticket coaching/personal brand -->
+  <!-- PALETTE: Deep Navy Trust — Vibrant v2 — bg:#F5F7FA, text:#0B1B2B, primary:#14304F, accent(CTA gradient):#F59E0B→#EF4444, dark sections:#0B1B2B -->
+  <!-- FONTS: Space Grotesk (headlines, modern geometric sans) + DM Sans (body) -->
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#14304F',
+            accent: '#F59E0B',
+            surface: '#F5F7FA',
+            border: '#D7DEE7',
+            dark: '#0B1B2B',
+            muted: '#5C7A99',
+            navydeep: '#0B1B2B',
+            navymid: '#1E3A5F'
+          },
+          fontFamily: {
+            serif: ['Space Grotesk', 'sans-serif'],
+            sans: ['DM Sans', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .fade-section {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .pull-quote {
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    .pull-quote::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background-color: #F59E0B;
+    }
+
+    .line-divider {
+      width: 60px;
+      height: 1px;
+      background-color: #F59E0B;
+      margin: 2rem auto;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-answer.open {
+      max-height: 500px;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+    }
+
+    .elegant-border { border: 1px solid #D7DEE7; }
+
+    .hover-underline { position: relative; display: inline-block; }
+    .hover-underline::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background-color: #F59E0B;
+      transition: width 0.3s ease;
+    }
+    .hover-underline:hover::after { width: 100%; }
+
+    .ordinal-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: #D7DEE7;
+      line-height: 1;
+      min-width: 4rem;
+    }
+
+    /* Humanize: warm glow behind hero headline, on the new dark-navy hero background */
+    .hero-blob {
+      position: absolute;
+      top: -6rem;
+      right: -8rem;
+      width: 28rem;
+      height: 28rem;
+      background: radial-gradient(circle, rgba(245,158,11,0.18) 0%, rgba(245,158,11,0) 70%);
+      border-radius: 9999px;
+      pointer-events: none;
+    }
+    .hero-blob-2 {
+      position: absolute;
+      bottom: -8rem;
+      left: -6rem;
+      width: 22rem;
+      height: 22rem;
+      background: radial-gradient(circle, rgba(59,105,151,0.35) 0%, rgba(59,105,151,0) 70%);
+      border-radius: 9999px;
+      pointer-events: none;
+    }
+
+    /* Intentional slight tilt on the founding-cohort badge — crafted, not machine-perfect */
+    .tilt-badge { transform: rotate(-2deg); }
+
+    /* Primary CTA — soft pulsing glow ring to pull the eye, tasteful not obnoxious */
+    @keyframes cta-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(239,68,68,0.45), 0 10px 30px -8px rgba(0,0,0,0.4); }
+      70%  { box-shadow: 0 0 0 14px rgba(239,68,68,0), 0 10px 30px -8px rgba(0,0,0,0.4); }
+      100% { box-shadow: 0 0 0 0 rgba(239,68,68,0), 0 10px 30px -8px rgba(0,0,0,0.4); }
+    }
+    .cta-glow { animation: cta-pulse 2.4s ease-out infinite; }
+    .cta-glow:hover { animation-play-state: paused; transform: translateY(-2px) scale(1.02); }
+
+    /* Checkout step indicator dots */
+    .step-dot {
+      width: 1.75rem; height: 1.75rem; border-radius: 9999px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem; font-weight: 700;
+      background: #D7DEE7; color: #5C7A99;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+    .step-dot-active { background: #F59E0B; color: #ffffff; }
+  </style>
+</head>
+
+<body class="font-sans text-dark bg-surface">
+
+<!-- NAV -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-sm border-b border-border">
+  <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+    <a href="#" class="font-serif text-xl font-semibold text-dark tracking-tight">BRAND SPEED</a>
+    <div class="hidden md:flex items-center gap-8 text-sm text-primary">
+      <a href="#projects" class="hover-underline transition-colors hover:text-dark">Dự án</a>
+      <a href="#about" class="hover-underline transition-colors hover:text-dark">Về Huynh</a>
+      <a href="#included" class="hover-underline transition-colors hover:text-dark">Nội dung</a>
+      <a href="#pricing" class="hover-underline transition-colors hover:text-dark">Học phí</a>
+    </div>
+    <a href="#pricing" class="text-sm font-bold text-white bg-gradient-to-r from-[#F59E0B] to-[#EF4444] px-5 py-2 rounded hover:brightness-110 transition-all duration-300 cursor-pointer shadow-md shadow-black/20">
+      Giữ suất Founding Cohort
+    </a>
+  </div>
+</nav>
+
+
+<!-- HERO — dark navy gradient for strong above-fold impact -->
+<section class="relative pt-40 pb-28 px-6 fade-section overflow-hidden bg-gradient-to-br from-navydeep via-[#2d1b4e] to-[#24466f]">
+  <div class="hero-blob"></div>
+  <div class="hero-blob-2"></div>
+  <div class="max-w-3xl mx-auto text-center relative">
+    <p class="text-sm font-semibold text-accent uppercase tracking-widest mb-6">Dành cho chủ doanh nghiệp nhỏ / coach tại Việt Nam — không rành công nghệ</p>
+
+    <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight mb-8">
+      Có Bộ Thương Hiệu + Website Chuyên Nghiệp Trong 14 Ngày
+    </h1>
+
+    <div class="line-divider"></div>
+
+    <p class="text-lg md:text-xl text-gray-200 leading-relaxed max-w-2xl mx-auto mt-8 mb-10">
+      Không cần biết AI, không cần chờ agency vài tuần — có chuyên gia 12 năm kinh nghiệm trực tiếp làm cùng, không phải AI làm một mình.
+    </p>
+
+    <a href="#pricing" class="cta-glow inline-flex items-center gap-2 bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-white font-bold px-12 py-5 text-lg rounded-md tracking-wide hover:brightness-110 transition-all duration-300 cursor-pointer">
+      Giữ 1 trong 9 suất Founding Cohort
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    </a>
+
+    <p class="mt-6 text-sm text-gray-300">12 năm kinh nghiệm · 697+ khách hàng · 275+ dự án đã bàn giao · Chỉ còn 9 suất Founding Cohort</p>
+  </div>
+</section>
+
+
+<!-- PROBLEM -->
+<section class="py-20 px-6 fade-section">
+  <div class="max-w-2xl mx-auto">
+    <p class="text-sm font-medium text-accent uppercase tracking-widest mb-8">Vấn Đề</p>
+
+    <p class="text-lg text-dark leading-relaxed mb-6">
+      Anh/chị biết cảm giác này rồi. Muốn có thương hiệu bài bản để trông chuyên nghiệp hơn, chốt khách dễ hơn — nhưng mỗi lần nghĩ tới chuyện "làm thương hiệu", đầu lại rối. Thuê agency thì 3-28,5 triệu, chờ 4-6 ngày đến vài tuần, xong việc là hết — muốn sửa gì cũng phải gọi lại, phụ thuộc mãi. Tự làm bằng AI thì rẻ, nhưng không ai review.
+    </p>
+
+    <blockquote class="pull-quote my-10 py-2">
+      <p class="font-serif text-2xl md:text-3xl text-dark leading-snug italic">
+        "Điều tệ nhất không phải là thiếu tiền hay thiếu ý tưởng — mà là không biết bắt đầu từ đâu, và sợ giao việc cho công nghệ mà mất kiểm soát."
+      </p>
+    </blockquote>
+
+    <p class="text-lg text-primary leading-relaxed mb-6">
+      Từ 01/04/2026, sản phẩm do AI tự tạo hoàn toàn, không có người tham gia, còn không được pháp luật bảo hộ bản quyền. Và nếu không làm gì, 6 tháng nữa anh/chị vẫn đang dùng logo tự vẽ tạm, website làm cho có, trong khi đối thủ đã trông chuyên nghiệp hơn hẳn.
+    </p>
+
+    <p class="text-lg text-dark leading-relaxed font-medium">
+      Có một cách khác — nhanh như dùng AI, nhưng vẫn có chuyên gia thật cầm tay chỉ việc.
+    </p>
+  </div>
+</section>
+
+
+<!-- WHAT'S INCLUDED -->
+<section id="included" class="py-20 px-6 border-t border-border fade-section">
+  <div class="max-w-3xl mx-auto">
+    <p class="text-sm font-medium text-accent uppercase tracking-widest mb-4">Nội Dung Chương Trình</p>
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-dark mb-16">Đây Là Những Gì Anh/Chị Nhận Được</h2>
+
+    <div class="flex gap-6 md:gap-10 mb-12 items-start">
+      <span class="ordinal-number">01</span>
+      <div class="pt-2">
+        <h3 class="text-xl font-semibold text-dark mb-2">Khóa video quy trình AI xây thương hiệu + website</h3>
+        <p class="text-primary leading-relaxed">Từng bước cụ thể, mục tiêu hoàn thành trong 14 ngày làm việc tập trung — không cần biết AI hay công nghệ trước khi bắt đầu.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-6 md:gap-10 mb-12 items-start">
+      <span class="ordinal-number">02</span>
+      <div class="pt-2">
+        <h3 class="text-xl font-semibold text-dark mb-2">Coaching nhóm hàng tuần, 8 tuần</h3>
+        <p class="text-primary leading-relaxed">Đồng hành trực tiếp qua Zoom, review tiến độ, sửa sai kịp thời — không bao giờ bị bỏ mặc giữa chừng.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-6 md:gap-10 mb-12 items-start">
+      <span class="ordinal-number">03</span>
+      <div class="pt-2">
+        <h3 class="text-xl font-semibold text-dark mb-2">1 buổi done-with-you riêng với Huynh</h3>
+        <p class="text-primary leading-relaxed">Buổi làm cùng trực tiếp để hoàn thiện bộ thương hiệu + website sẵn sàng dùng ngay.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-6 md:gap-10 mb-12 items-start">
+      <span class="ordinal-number">04</span>
+      <div class="pt-2">
+        <h3 class="text-xl font-semibold text-dark mb-2">Bộ 50+ prompt AI đã kiểm chứng</h3>
+        <p class="text-primary leading-relaxed">Đúc kết từ 12 năm kinh nghiệm thiết kế thật — không phải prompt generic tìm trên mạng.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-6 md:gap-10 mb-12 items-start">
+      <span class="ordinal-number">05</span>
+      <div class="pt-2">
+        <h3 class="text-xl font-semibold text-dark mb-2">Module "Brand Strategy Thinking"</h3>
+        <p class="text-primary leading-relaxed">Phần chiến lược định vị mà AI không làm thay được — tạo ra khác biệt thật giữa các thương hiệu.</p>
+      </div>
+    </div>
+
+    <div class="flex gap-6 md:gap-10 items-start bg-accent/10 border border-accent/30 p-6 md:p-8">
+      <span class="ordinal-number text-accent">+</span>
+      <div class="pt-2">
+        <p class="text-sm font-medium text-accent uppercase tracking-wider mb-1">Bonus</p>
+        <h3 class="text-xl font-semibold text-dark mb-2">Cộng đồng riêng + review bài tập hàng tuần</h3>
+        <p class="text-primary leading-relaxed">Trong suốt 8 tuần, luôn có nơi để hỏi khi bí — không đơn độc trên hành trình này.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- BEFORE / AFTER -->
+<section class="py-20 px-6 border-t border-border fade-section">
+  <div class="max-w-4xl mx-auto">
+    <p class="text-sm font-medium text-accent uppercase tracking-widest mb-4 text-center">Sự Thay Đổi</p>
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-dark mb-16 text-center">Trước & Sau BRAND SPEED</h2>
+
+    <div class="grid md:grid-cols-2 gap-0">
+      <div class="p-8 md:p-10 md:border-r border-border">
+        <p class="text-sm font-medium text-red-600 uppercase tracking-wider mb-6">Trước</p>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            <span class="text-primary">Thuê agency: 3-28,5 triệu, chờ vài tuần, phụ thuộc mãi mãi</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            <span class="text-primary">Tự làm AI một mình: không ai review, rủi ro không được bảo hộ bản quyền</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            <span class="text-primary">Không rành công nghệ, sợ AI, không biết bắt đầu từ đâu</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            <span class="text-primary">Logo tự vẽ tạm, website làm cho có, chưa xứng tầm doanh nghiệp</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="p-8 md:p-10 border-t md:border-t-0 border-border">
+        <p class="text-sm font-medium text-emerald-600 uppercase tracking-wider mb-6">Sau</p>
+        <ul class="space-y-4">
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-dark font-medium">Bộ thương hiệu + website hoàn chỉnh trong 14 ngày</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-dark font-medium">Chuyên gia 12 năm kinh nghiệm review trực tiếp từng bước</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-dark font-medium">Không cần biết công nghệ — có người làm cùng, không tự bơi</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <svg class="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            <span class="text-dark font-medium">Tự vận hành được về sau, không phải thuê lại mỗi lần cần sửa</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- CLIENT PROOF (real numbers + real client names, no fabricated quotes) — dark navy band for visual punch -->
+<section class="py-16 px-6 bg-navydeep fade-section">
+  <div class="max-w-3xl mx-auto text-center">
+    <p class="text-sm font-semibold text-accent uppercase tracking-widest mb-8">Uy Tín</p>
+    <div class="grid grid-cols-3 gap-6 mb-10">
+      <div>
+        <p class="font-serif text-3xl md:text-4xl font-bold text-accent">697+</p>
+        <p class="text-sm text-gray-300 mt-1">khách hàng tin tưởng</p>
+      </div>
+      <div>
+        <p class="font-serif text-3xl md:text-4xl font-bold text-accent">98,8%</p>
+        <p class="text-sm text-gray-300 mt-1">khách hàng hài lòng</p>
+      </div>
+      <div>
+        <p class="font-serif text-3xl md:text-4xl font-bold text-accent">275+</p>
+        <p class="text-sm text-gray-300 mt-1">dự án đã bàn giao</p>
+      </div>
+    </div>
+    <p class="text-sm text-gray-400 mb-4">Đã đồng hành cùng</p>
+    <p class="text-gray-200 leading-loose">
+      Tuấn Tú Travel &nbsp;·&nbsp; Hateco ICT &nbsp;·&nbsp; Nation LED &nbsp;·&nbsp; Hoa Vỹ &nbsp;·&nbsp; BĐS Hùng Vương &nbsp;·&nbsp; 123Fund &nbsp;·&nbsp; Glink &nbsp;·&nbsp; Green World &nbsp;·&nbsp; VIC Group &nbsp;·&nbsp; Level 9 &nbsp;·&nbsp; Tân Hoàn Mỹ
+    </p>
+  </div>
+</section>
+
+
+<!-- COMPLETED PROJECTS SHOWCASE — structure ready, awaiting real photos (see note) -->
+<section id="projects" class="py-20 px-6 border-t border-border fade-section">
+  <div class="max-w-5xl mx-auto">
+    <p class="text-sm font-semibold text-accent uppercase tracking-widest mb-4 text-center">Portfolio</p>
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-dark mb-4 text-center">Một Số Dự Án Đã Hoàn Thành</h2>
+    <p class="text-center text-muted mb-14 max-w-xl mx-auto">Ảnh thật từ các dự án đã bàn giao — bởi đội ngũ Moza, nơi Huynh trực tiếp thiết kế và quản lý.</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="group relative aspect-[4/3] rounded-lg overflow-hidden bg-navydeep">
+        <img src="assets/projects/tuan-tu-travel.jpg" alt="Dự án thiết kế website Tuấn Tú Travel" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent"></div>
+        <span class="absolute top-4 left-4 text-xs font-semibold uppercase tracking-wider text-navydeep bg-accent px-2 py-1 rounded">Website</span>
+        <p class="absolute bottom-4 left-5 text-white font-semibold text-lg">Tuấn Tú Travel</p>
+      </div>
+      <div class="group relative aspect-[4/3] rounded-lg overflow-hidden bg-navydeep">
+        <img src="assets/projects/hateco-ict.jpg" alt="Dự án nhận diện thương hiệu Hateco ICT" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent"></div>
+        <span class="absolute top-4 left-4 text-xs font-semibold uppercase tracking-wider text-navydeep bg-accent px-2 py-1 rounded">Nhận diện thương hiệu</span>
+        <p class="absolute bottom-4 left-5 text-white font-semibold text-lg">Hateco ICT</p>
+      </div>
+      <div class="group relative aspect-[4/3] rounded-lg overflow-hidden bg-navydeep">
+        <img src="assets/projects/nationled.jpg" alt="Dự án thiết kế logo thương hiệu Nation LED" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent"></div>
+        <span class="absolute top-4 left-4 text-xs font-semibold uppercase tracking-wider text-navydeep bg-accent px-2 py-1 rounded">Logo</span>
+        <p class="absolute bottom-4 left-5 text-white font-semibold text-lg">Nation LED</p>
+      </div>
+      <div class="group relative aspect-[4/3] rounded-lg overflow-hidden bg-navydeep">
+        <img src="assets/projects/hoa-vy.jpg" alt="Dự án thiết kế logo Hoa Vỹ" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent"></div>
+        <span class="absolute top-4 left-4 text-xs font-semibold uppercase tracking-wider text-navydeep bg-accent px-2 py-1 rounded">Logo</span>
+        <p class="absolute bottom-4 left-5 text-white font-semibold text-lg">Hoa Vỹ</p>
+      </div>
+      <div class="group relative aspect-[4/3] rounded-lg overflow-hidden bg-navydeep">
+        <img src="assets/projects/bds-hung-vuong.jpg" alt="Dự án nhận diện thương hiệu BĐS Hùng Vương" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent"></div>
+        <span class="absolute top-4 left-4 text-xs font-semibold uppercase tracking-wider text-navydeep bg-accent px-2 py-1 rounded">Nhận diện thương hiệu</span>
+        <p class="absolute bottom-4 left-5 text-white font-semibold text-lg">BĐS Hùng Vương</p>
+      </div>
+      <div class="group relative aspect-[4/3] rounded-lg overflow-hidden bg-navydeep">
+        <img src="assets/projects/glink.jpg" alt="Dự án thiết kế website Glink" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent"></div>
+        <span class="absolute top-4 left-4 text-xs font-semibold uppercase tracking-wider text-navydeep bg-accent px-2 py-1 rounded">Website</span>
+        <p class="absolute bottom-4 left-5 text-white font-semibold text-lg">Glink</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PERSONAL COMMITMENT (self-attributed quote — real, not a client testimonial) -->
+<section class="py-24 px-6 bg-white border-t border-b border-border fade-section">
+  <div class="max-w-3xl mx-auto text-center">
+    <span class="font-serif text-6xl text-border leading-none block mb-6">"</span>
+
+    <blockquote class="font-serif text-2xl md:text-3xl text-dark leading-snug italic mb-10">
+      Đây là lần đầu tiên tôi đóng gói 12 năm kinh nghiệm thành một chương trình có hướng dẫn cụ thể. Vì là cohort đầu tiên, tôi trực tiếp đồng hành từng người — không giao cho trợ giảng, không làm đại trà.
+    </blockquote>
+
+    <div class="line-divider"></div>
+
+    <div class="mt-8 flex items-center justify-center gap-4">
+      <div class="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center text-primary font-serif text-xl font-bold">H</div>
+      <div class="text-left">
+        <p class="font-semibold text-dark">Hoàng Quốc Huynh</p>
+        <p class="text-sm text-muted">Người sáng lập BRAND SPEED — 12 năm thiết kế thương hiệu & website</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PROCESS -->
+<section class="py-20 px-6 fade-section">
+  <div class="max-w-3xl mx-auto">
+    <p class="text-sm font-medium text-accent uppercase tracking-widest mb-4">Quy Trình</p>
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-dark mb-16">4 Bước, 8 Tuần</h2>
+
+    <div class="relative pl-8 md:pl-12">
+      <div class="absolute left-3 md:left-5 top-2 bottom-2 w-px bg-border"></div>
+
+      <div class="relative mb-14">
+        <div class="absolute left-[-1.45rem] md:left-[-2.45rem] top-1 w-3 h-3 rounded-full bg-accent border-2 border-surface"></div>
+        <p class="text-xs font-medium text-accent uppercase tracking-wider mb-2">Bước 1 — Tuần 1</p>
+        <h3 class="text-xl font-semibold text-dark mb-2">Đăng ký & xác định mục tiêu</h3>
+        <p class="text-primary leading-relaxed">Xác định rõ thương hiệu anh/chị muốn xây và mục tiêu kinh doanh đằng sau nó.</p>
+      </div>
+
+      <div class="relative mb-14">
+        <div class="absolute left-[-1.45rem] md:left-[-2.45rem] top-1 w-3 h-3 rounded-full bg-accent border-2 border-surface"></div>
+        <p class="text-xs font-medium text-accent uppercase tracking-wider mb-2">Bước 2 — Tuần 1-2</p>
+        <h3 class="text-xl font-semibold text-dark mb-2">AI phác thảo nhanh</h3>
+        <p class="text-primary leading-relaxed">Dùng bộ prompt AI đã kiểm chứng để tạo bản nháp logo, bộ nhận diện, wireframe website chỉ trong vài ngày.</p>
+      </div>
+
+      <div class="relative mb-14">
+        <div class="absolute left-[-1.45rem] md:left-[-2.45rem] top-1 w-3 h-3 rounded-full bg-accent border-2 border-surface"></div>
+        <p class="text-xs font-medium text-accent uppercase tracking-wider mb-2">Bước 3 — Tuần 3-6</p>
+        <h3 class="text-xl font-semibold text-dark mb-2">Chuyên gia review & hoàn thiện</h3>
+        <p class="text-primary leading-relaxed">Huynh trực tiếp review từng bản nháp, chỉnh chiến lược định vị, sửa những gì AI làm sai hoặc thiếu tinh tế.</p>
+      </div>
+
+      <div class="relative">
+        <div class="absolute left-[-1.45rem] md:left-[-2.45rem] top-1 w-3 h-3 rounded-full bg-accent border-2 border-surface"></div>
+        <p class="text-xs font-medium text-accent uppercase tracking-wider mb-2">Bước 4 — Tuần 7-8</p>
+        <h3 class="text-xl font-semibold text-dark mb-2">Hoàn thiện & bàn giao</h3>
+        <p class="text-primary leading-relaxed">Buổi done-with-you để hoàn thiện, cùng hướng dẫn để anh/chị tự vận hành thương hiệu về sau.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ABOUT THE CREATOR — dark navy band, mirrors hero, for maximum emphasis on trust -->
+<section id="about" class="relative py-24 px-6 fade-section overflow-hidden bg-gradient-to-br from-navydeep via-[#2d1b4e] to-navymid">
+  <div class="hero-blob"></div>
+  <div class="max-w-3xl mx-auto relative">
+    <div class="md:flex gap-10 items-start">
+      <div class="shrink-0 mb-8 md:mb-0">
+        <div class="w-40 md:w-48 aspect-[3/4] rounded-lg border-2 border-accent/40 mx-auto md:mx-0 overflow-hidden shadow-lg shadow-black/30">
+          <img src="assets/founder/hoanghuynh.jpg" alt="Hoàng Quốc Huynh — Người sáng lập BRAND SPEED" class="w-full h-full object-cover">
+        </div>
+      </div>
+
+      <div>
+        <p class="text-sm font-semibold text-accent uppercase tracking-widest mb-4">Người Đồng Hành Cùng Anh/Chị</p>
+        <h3 class="font-serif text-2xl md:text-3xl font-bold text-white mb-4">Hoàng Quốc Huynh</h3>
+        <p class="text-gray-200 leading-relaxed mb-4">Tốt nghiệp chuyên ngành Thiết kế Đồ họa, Viện Đại học Mở Hà Nội. 12 năm gắn bó với nghề, hiện là Giám đốc thương hiệu của Moza Media, tôi từng trực tiếp thiết kế và quản lý dự án cho hàng trăm thương hiệu — trong đó có Tuấn Tú Travel, cùng nhiều dự án bất động sản, công nghệ, F&amp;B, tài chính.</p>
+        <p class="text-gray-200 leading-relaxed mb-6">Sau nhiều năm làm trong môi trường agency, tôi nhận ra điều mình muốn nhất không phải là làm nhiều dự án hơn, mà là đồng hành sâu hơn với từng khách hàng. Tôi tạo ra BRAND SPEED để mang đúng cách làm đó đến với anh/chị — nhanh hơn, chi phí thấp hơn nhờ AI, nhưng vẫn có người thật đứng sau mỗi quyết định.</p>
+
+        <div class="flex flex-wrap gap-6 text-sm text-gray-300">
+          <span class="text-accent font-medium">12 năm kinh nghiệm</span>
+          <span class="text-white/20">|</span>
+          <span>Thiết kế Đồ họa — Viện Đại học Mở Hà Nội</span>
+          <span class="text-white/20">|</span>
+          <span class="text-accent font-medium">275+ dự án đã bàn giao</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PRICING — dark navy band matching hero, recommended plan pops as a bright card -->
+<section id="pricing" class="relative py-24 px-6 fade-section overflow-hidden bg-gradient-to-br from-[#2d1b4e] via-navymid to-navydeep">
+  <div class="hero-blob"></div>
+  <div class="max-w-4xl mx-auto relative">
+    <div class="text-center mb-16">
+      <p class="text-sm font-semibold text-accent uppercase tracking-widest mb-4">Học Phí</p>
+      <h2 class="font-serif text-3xl md:text-4xl font-bold text-white">Founding Cohort — Giá Đặc Biệt Cho 9 Người Đầu Tiên</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-3xl mx-auto items-stretch">
+      <!-- Plan 1: Future full price (anchor, not purchasable yet) — glass card, recedes into background -->
+      <div class="border border-white/15 bg-white/5 backdrop-blur-sm rounded-lg p-8 md:p-10">
+        <h3 class="font-serif text-xl font-semibold text-white mb-2">Giá Đầy Đủ (Cohort Sau)</h3>
+        <p class="text-sm text-gray-400 mb-6">Áp dụng từ cohort tiếp theo, sau khi Founding Cohort đủ 9 người</p>
+
+        <div class="mb-8">
+          <span class="font-serif text-4xl font-bold text-white">27.900.000</span>
+          <span class="text-gray-400 ml-1">VNĐ</span>
+        </div>
+
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-gray-300">
+            <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Khóa video quy trình AI, 8 tuần
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Coaching nhóm hàng tuần
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            1 buổi done-with-you riêng
+          </li>
+          <li class="flex items-start gap-3 text-gray-300">
+            <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Bộ prompt AI + Module Brand Strategy
+          </li>
+        </ul>
+
+        <span class="block text-center border border-white/20 text-gray-400 px-6 py-3 font-medium cursor-not-allowed rounded">
+          Chưa mở — để lại thông tin bên dưới
+        </span>
+      </div>
+
+      <!-- Plan 2: Founding Cohort (current, real offer) — bright white card, pops hard against dark section -->
+      <div class="bg-white rounded-lg border-2 border-accent p-8 md:p-10 relative shadow-2xl shadow-black/40">
+        <div class="tilt-badge absolute -top-3 left-6 bg-[#EF4444] text-white text-xs font-bold px-3 py-1 uppercase tracking-wider shadow-md">
+          Chỉ 9 suất
+        </div>
+
+        <h3 class="font-serif text-xl font-semibold text-dark mb-2">Founding Cohort</h3>
+        <p class="text-sm text-muted mb-6">Đổi lại: quyền dùng làm case study công khai</p>
+
+        <div class="mb-8">
+          <span class="font-serif text-4xl font-bold text-dark">9.900.000</span>
+          <span class="text-muted ml-1">VNĐ</span>
+        </div>
+
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-start gap-3 text-primary">
+            <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Toàn bộ nội dung chương trình đầy đủ
+          </li>
+          <li class="flex items-start gap-3 text-primary">
+            <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Thanh toán 2 đợt: 4.950.000đ giữ chỗ + 4.950.000đ sau tuần 4
+          </li>
+          <li class="flex items-start gap-3 text-primary">
+            <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Cam kết đo lường: hoàn 50% hoặc kèm 1:1 miễn phí nếu làm đủ 8/8 bài mà chưa xong
+          </li>
+          <li class="flex items-start gap-3 text-primary">
+            <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+            Đích thân Huynh trực tiếp coaching, không qua trợ giảng
+          </li>
+        </ul>
+
+        <!-- Checkout 2 bước: (1) thông tin khách → (2) QR thanh toán -->
+        <div class="flex items-center justify-center gap-2 mb-5">
+          <span id="step-dot-1" class="step-dot step-dot-active">1</span>
+          <span class="w-8 h-px bg-border"></span>
+          <span id="step-dot-2" class="step-dot">2</span>
+        </div>
+
+        <!-- BƯỚC 1: Thông tin khách hàng -->
+        <div id="checkout-step-1">
+          <p class="text-sm font-medium text-dark mb-4 text-center">Bước 1/2 — Điền thông tin để giữ chỗ</p>
+          <form id="lead-form" class="space-y-3">
+            <input type="text" id="lead-name" placeholder="Họ và tên" required
+              class="w-full px-4 py-3 border border-border rounded focus:outline-none focus:border-accent text-sm">
+            <input type="tel" id="lead-phone" placeholder="Số điện thoại" required
+              class="w-full px-4 py-3 border border-border rounded focus:outline-none focus:border-accent text-sm">
+            <input type="email" id="lead-email" placeholder="Email" required
+              class="w-full px-4 py-3 border border-border rounded focus:outline-none focus:border-accent text-sm">
+            <p id="lead-error" class="text-xs text-red-600 hidden"></p>
+            <button type="submit" class="cta-glow w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-white px-6 py-4 font-bold text-base rounded-md tracking-wide hover:brightness-110 transition-all duration-300 cursor-pointer">
+              <span id="lead-submit-text">Tiếp tục — Xem mã QR</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+            </button>
+          </form>
+          <p class="text-xs text-muted text-center mt-3">Thông tin dùng để Huynh liên hệ xác nhận giữ chỗ — không dùng cho mục đích khác</p>
+        </div>
+
+        <!-- BƯỚC 2: Mã QR thanh toán -->
+        <div id="checkout-step-2" class="hidden">
+          <p class="text-sm font-medium text-dark mb-4 text-center">Bước 2/2 — Quét mã để đặt cọc</p>
+          <div class="text-center mb-4 p-4 bg-accent/10 border border-accent/30 rounded-lg">
+            <p class="text-sm font-medium text-dark mb-1">Xin chào <span id="lead-name-display" class="font-bold"></span> 👋</p>
+            <p class="text-xs text-muted mb-3">Quét mã bên dưới để đặt cọc 4.950.000đ giữ chỗ</p>
+            <img id="qr-image" src="" alt="Mã QR VietQR — MBBank 888888393988 — Hoàng Quốc Huynh" class="mx-auto w-48 h-48">
+            <p class="mt-2 text-xs text-muted">MBBank · 888888393988 · HOANG QUOC HUYNH<br>Nội dung CK đã tự điền sẵn — giữ nguyên khi chuyển</p>
+          </div>
+          <p class="text-xs text-muted text-center mb-3">Chuyển xong là xong — Huynh sẽ chủ động nhắn xác nhận, không cần liên hệ trước.</p>
+          <button type="button" id="back-to-step-1" class="w-full text-center text-xs text-muted hover:text-dark underline cursor-pointer">← Sửa lại thông tin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- FAQ -->
+<section class="py-20 px-6 border-t border-border fade-section">
+  <div class="max-w-2xl mx-auto">
+    <p class="text-sm font-medium text-accent uppercase tracking-widest mb-4 text-center">Câu Hỏi</p>
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-dark mb-16 text-center">Câu Hỏi Thường Gặp</h2>
+
+    <div class="border-b border-border">
+      <button onclick="toggleFaq(this)" class="w-full py-5 flex justify-between items-center text-left cursor-pointer group">
+        <span class="font-medium text-dark group-hover:text-accent transition-colors pr-4">Tôi không rành công nghệ/AI, liệu có theo kịp không?</span>
+        <span class="text-2xl text-muted shrink-0 transition-transform">+</span>
+      </button>
+      <div class="faq-answer text-primary leading-relaxed px-0">Chương trình được thiết kế riêng cho người không rành công nghệ — mỗi bước đều có hướng dẫn cụ thể, và có buổi done-with-you để Huynh làm cùng, không để anh/chị tự mò một mình.</div>
+    </div>
+
+    <div class="border-b border-border">
+      <button onclick="toggleFaq(this)" class="w-full py-5 flex justify-between items-center text-left cursor-pointer group">
+        <span class="font-medium text-dark group-hover:text-accent transition-colors pr-4">Sao giá Founding Cohort rẻ hơn nhiều so với giá full?</span>
+        <span class="text-2xl text-muted shrink-0 transition-transform">+</span>
+      </button>
+      <div class="faq-answer text-primary leading-relaxed px-0">Vì đây là cohort đầu tiên, tôi muốn có case study thật trước khi bán giá full 27.900.000đ. Đổi lại giá thấp hơn, anh/chị đồng ý cho phép chia sẻ kết quả công khai.</div>
+    </div>
+
+    <div class="border-b border-border">
+      <button onclick="toggleFaq(this)" class="w-full py-5 flex justify-between items-center text-left cursor-pointer group">
+        <span class="font-medium text-dark group-hover:text-accent transition-colors pr-4">Khác gì so với thuê agency thiết kế thương hiệu?</span>
+        <span class="text-2xl text-muted shrink-0 transition-transform">+</span>
+      </button>
+      <div class="faq-answer text-primary leading-relaxed px-0">Agency làm thay 100% nhưng anh/chị không học được gì và phải thuê lại mỗi lần cần sửa. BRAND SPEED giúp anh/chị vừa có sản phẩm, vừa hiểu và tự vận hành được thương hiệu về sau.</div>
+    </div>
+
+    <div class="border-b border-border">
+      <button onclick="toggleFaq(this)" class="w-full py-5 flex justify-between items-center text-left cursor-pointer group">
+        <span class="font-medium text-dark group-hover:text-accent transition-colors pr-4">Nếu làm hết mà vẫn chưa ra được thương hiệu ưng ý thì sao?</span>
+        <span class="text-2xl text-muted shrink-0 transition-transform">+</span>
+      </button>
+      <div class="faq-answer text-primary leading-relaxed px-0">Nếu anh/chị nộp đủ 8/8 bài tập đúng hạn theo checklist công khai mà đến cuối tuần 8 chưa có kết quả, được chọn: hoàn 50% học phí hoặc tiếp tục kèm 1:1 miễn phí đến khi xong.</div>
+    </div>
+
+    <div class="border-b border-border">
+      <button onclick="toggleFaq(this)" class="w-full py-5 flex justify-between items-center text-left cursor-pointer group">
+        <span class="font-medium text-dark group-hover:text-accent transition-colors pr-4">Sản phẩm cuối cùng có được bảo hộ bản quyền không?</span>
+        <span class="text-2xl text-muted shrink-0 transition-transform">+</span>
+      </button>
+      <div class="faq-answer text-primary leading-relaxed px-0">Chương trình được thiết kế để tối đa hoá khả năng đáp ứng yếu tố "có con người tham gia" theo luật hiện hành, nhưng không cam kết kết quả đăng ký — quyết định thuộc Cục Sở hữu trí tuệ.</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SECONDARY CAPTURE (not ready yet) -->
+<section class="py-20 px-6 bg-white border-t border-border fade-section">
+  <div class="max-w-xl mx-auto text-center">
+    <p class="text-sm font-medium text-accent uppercase tracking-widest mb-4">Chưa Sẵn Sàng?</p>
+    <h2 class="font-serif text-2xl md:text-3xl font-bold text-dark mb-4">Để Lại Thông Tin, Nhận Cập Nhật Thật</h2>
+    <p class="text-primary mb-8">Nhận thông báo ngay khi Founding Cohort mở lại, hoặc khi có case study đầu tiên từ 9 học viên sáng lập.</p>
+
+    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="return false;">
+      <input type="email" placeholder="Email của anh/chị" class="flex-1 px-4 py-3 border border-border bg-surface text-dark placeholder:text-muted focus:outline-none focus:border-accent transition-colors" required>
+      <button type="submit" class="bg-accent text-white px-6 py-3 font-medium hover:bg-[#C2740A] transition-colors cursor-pointer whitespace-nowrap">
+        Gửi Cho Tôi
+      </button>
+    </form>
+
+    <p class="mt-4 text-xs text-muted">Không spam. Chỉ gửi khi có cập nhật thật.</p>
+  </div>
+</section>
+
+
+<!-- FINAL CTA + FOOTER — dark navy closing band, mirrors hero for a strong bookend -->
+<section class="relative py-24 px-6 fade-section overflow-hidden bg-gradient-to-br from-[#24466f] via-navymid to-navydeep">
+  <div class="max-w-3xl mx-auto text-center relative">
+    <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Founding Cohort Chỉ Còn 5 Suất</h2>
+    <p class="text-lg text-gray-200 mb-10 max-w-xl mx-auto">Khi đăng ký hôm nay: bộ thương hiệu + website hoàn chỉnh sau 8 tuần, chuyên gia 12 năm kinh nghiệm đồng hành trực tiếp, cam kết đo lường được — không phải lời hứa suông.</p>
+
+    <a href="#pricing" class="cta-glow inline-flex items-center gap-2 bg-gradient-to-r from-[#F59E0B] to-[#EF4444] text-white font-bold px-12 py-5 text-lg rounded-md tracking-wide hover:brightness-110 transition-all duration-300 cursor-pointer">
+      Giữ 1 trong 9 suất Founding Cohort
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+    </a>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-300">
+      <span>Thanh toán an toàn qua SePay/VietQR</span>
+      <span class="text-gray-500">|</span>
+      <span>Cam kết đo lường được</span>
+      <span class="text-gray-500">|</span>
+      <span>Bắt đầu ngay khi đủ 9 người</span>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-navydeep border-t border-white/10 py-10 px-6">
+  <div class="max-w-4xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-gray-400">
+    <p class="font-serif text-white font-semibold">BRAND SPEED</p>
+    <div class="flex gap-6">
+      <a href="#" class="hover-underline hover:text-white transition-colors">Chính sách bảo mật</a>
+      <a href="#" class="hover-underline hover:text-white transition-colors">Điều khoản</a>
+      <a href="#" class="hover-underline hover:text-white transition-colors">Liên hệ</a>
+    </div>
+    <p>&copy; 2026 BRAND SPEED — Hoàng Quốc Huynh</p>
+  </div>
+</footer>
+
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+// Checkout: Bước 1 (thông tin khách) → Bước 2 (QR thanh toán)
+(function () {
+  const form = document.getElementById('lead-form');
+  if (!form) return; // section not present on this page load
+
+  const step1 = document.getElementById('checkout-step-1');
+  const step2 = document.getElementById('checkout-step-2');
+  const dot1 = document.getElementById('step-dot-1');
+  const dot2 = document.getElementById('step-dot-2');
+  const errorEl = document.getElementById('lead-error');
+  const submitText = document.getElementById('lead-submit-text');
+  const backBtn = document.getElementById('back-to-step-1');
+
+  function showStep2(name, orderCode) {
+    document.getElementById('lead-name-display').textContent = name;
+    document.getElementById('qr-image').src =
+      `https://vietqr.app/img?acc=888888393988&bank=MBBank&amount=4950000&des=${orderCode}&template=compact&holder=HOANG%20QUOC%20HUYNH&showinfo=true`;
+    step1.classList.add('hidden');
+    step2.classList.remove('hidden');
+    dot1.classList.remove('step-dot-active');
+    dot2.classList.add('step-dot-active');
+  }
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    errorEl.classList.add('hidden');
+
+    const name = document.getElementById('lead-name').value.trim();
+    const phoneRaw = document.getElementById('lead-phone').value.trim();
+    const email = document.getElementById('lead-email').value.trim();
+    const phoneDigits = phoneRaw.replace(/\D/g, '');
+
+    if (!name || phoneDigits.length < 9 || !email.includes('@')) {
+      errorEl.textContent = 'Anh/chị điền đủ họ tên, số điện thoại (9+ số) và email hợp lệ giúp em nhé.';
+      errorEl.classList.remove('hidden');
+      return;
+    }
+
+    const orderCode = 'BRANDSPEED' + phoneDigits;
+    submitText.textContent = 'Đang xử lý...';
+
+    try {
+      await fetch('/api/save-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone: phoneDigits, email, orderCode }),
+      });
+    } catch (err) {
+      // Don't block the buyer on a notify failure — they still need to see the QR.
+      console.error('save-lead failed, continuing anyway:', err);
+    }
+
+    submitText.textContent = 'Tiếp tục — Xem mã QR';
+    showStep2(name, orderCode);
+  });
+
+  backBtn.addEventListener('click', function () {
+    step2.classList.add('hidden');
+    step1.classList.remove('hidden');
+    dot2.classList.remove('step-dot-active');
+    dot1.classList.add('step-dot-active');
+  });
+})();
+
+function toggleFaq(button) {
+  const answer = button.nextElementSibling;
+  const icon = button.querySelector('span:last-child');
+  const isOpen = answer.classList.contains('open');
+
+  document.querySelectorAll('.faq-answer.open').forEach(el => {
+    el.classList.remove('open');
+    el.previousElementSibling.querySelector('span:last-child').textContent = '+';
+  });
+
+  if (!isOpen) {
+    answer.classList.add('open');
+    icon.textContent = '−';
+  }
+}
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-section').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
