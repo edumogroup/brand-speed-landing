@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
   res.status(200).json({ success: true });
 
   notifyTelegram({ name, phone, email, orderCode });
+  saveToGoogleSheet({ name, phone, email, orderCode });
 };
 
 async function notifyTelegram({ name, phone, email, orderCode }) {
@@ -52,5 +53,29 @@ async function notifyTelegram({ name, phone, email, orderCode }) {
     }
   } catch (err) {
     console.error('Failed to send lead Telegram notification:', err);
+  }
+}
+
+// Sends the lead to a Google Sheet via an Apps Script Web App endpoint.
+// GOOGLE_SHEET_WEBHOOK_URL / GOOGLE_SHEET_SECRET are set in Vercel env vars.
+async function saveToGoogleSheet({ name, phone, email, orderCode }) {
+  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+  const secret = process.env.GOOGLE_SHEET_SECRET;
+  if (!webhookUrl) {
+    console.warn('Google Sheet not configured (GOOGLE_SHEET_WEBHOOK_URL missing) — skipping sheet save');
+    return;
+  }
+
+  try {
+    const resp = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, email, orderCode, secret }),
+    });
+    if (!resp.ok) {
+      console.error('Google Sheet webhook error:', resp.status, await resp.text());
+    }
+  } catch (err) {
+    console.error('Failed to save lead to Google Sheet:', err);
   }
 }
