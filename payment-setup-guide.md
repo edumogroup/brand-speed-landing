@@ -61,3 +61,8 @@ Tự chuyển khoản 2.000đ vào chính tài khoản MBBank 888888393988 với
 ## Tự động xác nhận qua Telegram — đã cài đặt
 
 Webhook (`api/sepay-webhook.js`) giờ tự động gửi tin nhắn Telegram cho Huynh ngay khi có giao dịch khớp (tiền vào, đúng tài khoản, nội dung có "BRANDSPEED") — không cần mở dashboard SePay hay check log Vercel thủ công nữa. Chỉ cần hoàn thành bước 5-6 ở trên (tạo bot + dán biến môi trường) là chạy được.
+
+## Trạng thái
+
+- [x] Đã lấy SEPAY_API_KEY, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID và lưu vào Vercel
+- [x] Redeploy để nạp biến môi trường mới (commit này kích hoạt)
