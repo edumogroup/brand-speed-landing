@@ -576,7 +576,7 @@
           </li>
           <li class="flex items-start gap-3 text-primary">
             <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-            Thanh toán 2 đợt: 4.950.000đ giữ chỗ + 4.950.000đ sau tuần 4
+            Thanh toán 2 đợt: ~4.950.000đ giữ chỗ (+ vài nghìn đồng lẻ để định danh tự động) + 4.950.000đ sau tuần 4
           </li>
           <li class="flex items-start gap-3 text-primary">
             <svg class="w-4 h-4 text-accent shrink-0 mt-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
@@ -619,9 +619,11 @@
           <p class="text-sm font-medium text-dark mb-4 text-center">Bước 2/2 — Quét mã để đặt cọc</p>
           <div class="text-center mb-4 p-4 bg-accent/10 border border-accent/30 rounded-lg">
             <p class="text-sm font-medium text-dark mb-1">Xin chào <span id="lead-name-display" class="font-bold"></span> 👋</p>
-            <p class="text-xs text-muted mb-3">Quét mã bên dưới để đặt cọc 4.950.000đ giữ chỗ</p>
+            <p class="text-xs text-muted mb-3">Quét mã hoặc chuyển khoản thủ công đúng số tiền bên dưới</p>
             <img id="qr-image" src="" alt="Mã QR VietQR — MBBank 888888393988 — Hoàng Quốc Huynh" class="mx-auto w-48 h-48">
-            <p class="mt-2 text-xs text-muted">MBBank · 888888393988 · HOANG QUOC HUYNH<br>Nội dung CK đã tự điền sẵn — giữ nguyên khi chuyển</p>
+            <p class="mt-3 text-2xl font-serif font-bold text-dark">Chuyển đúng: <span id="deposit-amount-display" class="text-accent"></span>đ</p>
+            <p class="mt-1 text-xs font-semibold text-red-600">⚠️ Chuyển đúng đến từng đồng — số tiền lẻ này dùng để hệ thống nhận diện đúng anh/chị. Nếu làm tròn số, hệ thống sẽ không nhận ra và Huynh phải xử lý thủ công (chậm hơn).</p>
+            <p class="mt-2 text-xs text-muted">MBBank · 888888393988 · HOANG QUOC HUYNH</p>
           </div>
           <p class="text-xs text-muted text-center mb-3">Chuyển xong là xong — Huynh sẽ chủ động nhắn xác nhận, không cần liên hệ trước.</p>
           <button type="button" id="back-to-step-1" class="w-full text-center text-xs text-muted hover:text-dark underline cursor-pointer">← Sửa lại thông tin</button>
@@ -756,10 +758,13 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   const submitText = document.getElementById('lead-submit-text');
   const backBtn = document.getElementById('back-to-step-1');
 
-  function showStep2(name, orderCode) {
+  const FALLBACK_DEPOSIT = 4950000; // used only if /api/save-lead is unreachable
+
+  function showStep2(name, orderCode, depositAmount) {
     document.getElementById('lead-name-display').textContent = name;
+    document.getElementById('deposit-amount-display').textContent = depositAmount.toLocaleString('vi-VN');
     document.getElementById('qr-image').src =
-      `https://vietqr.app/img?acc=888888393988&bank=MBBank&amount=4950000&des=${orderCode}&template=compact&holder=HOANG%20QUOC%20HUYNH&showinfo=true`;
+      `https://vietqr.app/img?acc=888888393988&bank=MBBank&amount=${depositAmount}&des=${orderCode}&template=compact&holder=HOANG%20QUOC%20HUYNH&showinfo=true`;
     step1.classList.add('hidden');
     step2.classList.remove('hidden');
     dot1.classList.remove('step-dot-active');
@@ -784,19 +789,23 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     const orderCode = 'BRANDSPEED' + phoneDigits;
     submitText.textContent = 'Đang xử lý...';
 
+    let depositAmount = FALLBACK_DEPOSIT;
     try {
-      await fetch('/api/save-lead', {
+      const resp = await fetch('/api/save-lead', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, phone: phoneDigits, email, orderCode }),
       });
+      const data = await resp.json();
+      if (data && data.depositAmount) depositAmount = data.depositAmount;
     } catch (err) {
       // Don't block the buyer on a notify failure — they still need to see the QR.
-      console.error('save-lead failed, continuing anyway:', err);
+      // Falls back to the flat amount; Huynh will need to match this one manually.
+      console.error('save-lead failed, continuing with fallback amount:', err);
     }
 
     submitText.textContent = 'Tiếp tục — Xem mã QR';
-    showStep2(name, orderCode);
+    showStep2(name, orderCode, depositAmount);
   });
 
   backBtn.addEventListener('click', function () {

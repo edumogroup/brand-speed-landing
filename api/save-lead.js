@@ -5,6 +5,11 @@
 // No API-key auth here (unlike sepay-webhook.js) — this is called directly by
 // our own page's JS, there's no third party to authenticate. Just validate input.
 
+const { saveLead, updateReminderId } = require('../lib/sheet');
+const { sendEmail, reminderEmail } = require('../lib/email');
+
+const BASE_DEPOSIT = 4950000;
+
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -18,19 +23,32 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // Await both before responding — Vercel serverless functions can freeze/terminate
-  // right after the response is sent, killing any un-awaited "fire-and-forget" work
-  // in flight (this silently dropped notifications before). Run them concurrently
-  // so the buyer isn't stuck waiting on both round-trips back to back.
+  // Unique deposit amount per lead (base + small random offset) — real bank
+  // transfer content does NOT reliably preserve the order code we put in the
+  // VietQR "des" field (confirmed from live test data), so the payment webhook
+  // matches by this exact amount instead of by content text.
+  const depositAmount = BASE_DEPOSIT + Math.floor(Math.random() * 9999) + 1;
+
+  // Await everything before responding — Vercel serverless functions can
+  // freeze/terminate right after the response is sent, killing any un-awaited
+  // "fire-and-forget" work in flight (this silently dropped notifications before).
   await Promise.all([
-    notifyTelegram({ name, phone, email, orderCode }),
-    saveToGoogleSheet({ name, phone, email, orderCode }),
+    notifyTelegram({ name, phone, email, orderCode, depositAmount }),
+    saveLead({ name, phone, email, orderCode, depositAmount }),
   ]);
 
-  res.status(200).json({ success: true });
+  // Schedule the "chưa thanh toán" reminder for 30 minutes from now. If payment
+  // arrives before then, sepay-webhook.js cancels it via the stored email id.
+  const { subject, html } = reminderEmail({ name });
+  const reminderEmailId = await sendEmail({ to: email, subject, html, scheduledAt: 'in 30 min' });
+  if (reminderEmailId) {
+    await updateReminderId(orderCode, reminderEmailId);
+  }
+
+  res.status(200).json({ success: true, depositAmount });
 };
 
-async function notifyTelegram({ name, phone, email, orderCode }) {
+async function notifyTelegram({ name, phone, email, orderCode, depositAmount }) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!botToken || !chatId) {
@@ -43,7 +61,8 @@ async function notifyTelegram({ name, phone, email, orderCode }) {
     `👤 Tên: ${name}\n` +
     `📞 SĐT: ${phone}\n` +
     `📧 Email: ${email}\n` +
-    `🔖 Mã đơn (sẽ khớp với nội dung CK): \`${orderCode || 'N/A'}\`\n\n` +
+    `💵 Số tiền cần khớp: \`${Number(depositAmount).toLocaleString('vi-VN')} VNĐ\`\n` +
+    `🔖 Mã đơn: \`${orderCode || 'N/A'}\`\n\n` +
     `Người này vừa xem mã QR. Nếu 10-15 phút nữa chưa thấy tin nhắn "đã nhận tiền" từ bot, có thể chủ động nhắn hỏi.`;
 
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
@@ -58,29 +77,5 @@ async function notifyTelegram({ name, phone, email, orderCode }) {
     }
   } catch (err) {
     console.error('Failed to send lead Telegram notification:', err);
-  }
-}
-
-// Sends the lead to a Google Sheet via an Apps Script Web App endpoint.
-// GOOGLE_SHEET_WEBHOOK_URL / GOOGLE_SHEET_SECRET are set in Vercel env vars.
-async function saveToGoogleSheet({ name, phone, email, orderCode }) {
-  const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
-  const secret = process.env.GOOGLE_SHEET_SECRET;
-  if (!webhookUrl) {
-    console.warn('Google Sheet not configured (GOOGLE_SHEET_WEBHOOK_URL missing) — skipping sheet save');
-    return;
-  }
-
-  try {
-    const resp = await fetch(webhookUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, phone, email, orderCode, secret }),
-    });
-    if (!resp.ok) {
-      console.error('Google Sheet webhook error:', resp.status, await resp.text());
-    }
-  } catch (err) {
-    console.error('Failed to save lead to Google Sheet:', err);
   }
 }

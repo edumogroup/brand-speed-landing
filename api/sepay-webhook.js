@@ -5,14 +5,19 @@
 // SePay sends:  Authorization: Apikey <the key you set in their dashboard>
 // Set the SAME key as an environment variable SEPAY_API_KEY in Vercel (Project → Settings → Environment Variables).
 // Never hardcode the key here.
+//
+// Confirmed working 2026-07-18: SePay dashboard auth method must be set to
+// "API Key" (not HMAC-SHA256) for this header-based check to receive anything.
+
+const { markPaidByAmount } = require('../lib/sheet');
+const { sendEmail, cancelScheduledEmail, paidConfirmationEmail, onboardingEmail } = require('../lib/email');
 
 // In-memory dedup guard — resets on cold start. Good enough for a 9-seat Founding Cohort;
 // swap for a real store (KV/Postgres) if volume grows.
 const seenTransactionIds = new Set();
 
 // Sends the deposit alert to Huynh's Telegram — instant, no dashboard/log checking needed.
-// Requires TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID env vars (see payment-setup-guide.md).
-async function notifyTelegram({ id, gateway, transactionDate, transferAmount, content }) {
+async function notifyTelegram({ id, gateway, transactionDate, transferAmount, content, matchedLead }) {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!botToken || !chatId) {
@@ -21,23 +26,21 @@ async function notifyTelegram({ id, gateway, transactionDate, transferAmount, co
   }
 
   const amountFormatted = Number(transferAmount || 0).toLocaleString('vi-VN');
-  // Order code from Checkout Step 1 is "BRANDSPEED" + phone digits — strip the
-  // prefix so this lines up visually with the SĐT in the earlier "Lead mới" alert.
-  const phoneFromContent = typeof content === 'string'
-    ? content.toUpperCase().replace('BRANDSPEED', '').trim()
-    : '';
+  const leadLines = matchedLead && matchedLead.found
+    ? `👤 Khách: ${matchedLead.name}\n📞 SĐT: ${matchedLead.phone}\n📧 Email: ${matchedLead.email}\n✅ Đã tự động gửi email xác nhận + hướng dẫn học tập.\n\n`
+    : `⚠️ Không khớp được với lead nào trong sheet (có thể là chuyển khoản test) — kiểm tra thủ công.\n\n`;
 
   const message =
     `💰 *BRAND SPEED — Founding Cohort*\n\n` +
     `Có người vừa đặt cọc giữ suất!\n\n` +
+    leadLines +
     `💵 Số tiền: \`${amountFormatted} VND\`\n` +
     `🏦 Ngân hàng: ${gateway || 'N/A'}\n` +
-    `📝 Nội dung CK: ${content || 'N/A'}\n` +
-    (phoneFromContent ? `📞 SĐT khớp lead: \`${phoneFromContent}\`\n` : '') +
     `🔖 Mã GD: ${id || 'N/A'}\n` +
     `⏰ ${transactionDate || new Date().toLocaleString('vi-VN')}\n\n` +
-    `👉 Tìm tin nhắn "Lead mới" có cùng SĐT ở trên để lấy tên + email, ` +
-    `rồi nhắn Zalo xác nhận + bắt đầu onboard.`;
+    (matchedLead && matchedLead.found
+      ? `👉 Nhắn Zalo ${matchedLead.name} để xác nhận + bắt đầu onboard.`
+      : `👉 Vào lịch sử giao dịch MBBank để xem người chuyển, đối chiếu thủ công.`);
 
   const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
   try {
@@ -61,8 +64,6 @@ module.exports = async (req, res) => {
   }
 
   // 1. Verify the API key SePay sends in the Authorization header.
-  // Confirmed working 2026-07-18: SePay dashboard auth method must be set to
-  // "API Key" (not HMAC-SHA256) for this header-based check to receive anything.
   const authHeader = req.headers['authorization'] || '';
   const envKey = process.env.SEPAY_API_KEY || '';
   const expected = `Apikey ${envKey}`;
@@ -79,9 +80,11 @@ module.exports = async (req, res) => {
     gateway,          // bank name, e.g. "MBBank"
     transactionDate,
     accountNumber,
-    content,          // transfer content/memo — should contain "BRANDSPEED"
+    content,          // transfer content/memo — real bank content is unreliable
+                       // for per-customer matching (confirmed live), used only
+                       // as a loose sanity filter here, not the match key.
     transferType,     // "in" or "out"
-    transferAmount,   // VND
+    transferAmount,   // VND — this is the real match key (see save-lead.js)
   } = body;
 
   // 2. Dedup — SePay retries webhooks up to 7 times.
@@ -103,13 +106,31 @@ module.exports = async (req, res) => {
       id, gateway, transactionDate, transferAmount, content,
     });
 
-    // Because Founding Cohort is high-touch (9 seats, personal onboarding), we don't
-    // auto-deliver anything — we just alert Huynh instantly so he can follow up 1:1.
-    // 4. Await the Telegram send BEFORE responding — Vercel serverless functions can
-    // freeze/terminate right after the response is sent, killing any un-awaited
-    // "fire-and-forget" work in flight. A Telegram call takes <1s, well within
-    // SePay's 30s response budget, so awaiting here is safe and reliable.
-    await notifyTelegram({ id, gateway, transactionDate, transferAmount, content });
+    // 4. Identify WHICH lead this is by exact deposit amount (unique per lead).
+    const matchedLead = await markPaidByAmount(transferAmount);
+
+    if (matchedLead && matchedLead.found) {
+      // Cancel the pending "chưa thanh toán" reminder so it doesn't awkwardly
+      // arrive after they've already paid.
+      if (matchedLead.reminderEmailId) {
+        await cancelScheduledEmail(matchedLead.reminderEmailId);
+      }
+
+      const confirm = paidConfirmationEmail({
+        name: matchedLead.name, amount: transferAmount, orderCode: matchedLead.orderCode,
+      });
+      const onboarding = onboardingEmail({ name: matchedLead.name });
+
+      await Promise.all([
+        sendEmail({ to: matchedLead.email, subject: confirm.subject, html: confirm.html }),
+        sendEmail({ to: matchedLead.email, subject: onboarding.subject, html: onboarding.html }),
+      ]);
+    }
+
+    // Because Founding Cohort is high-touch (9 seats, personal onboarding),
+    // Huynh still follows up 1:1 via Zalo — these emails/Telegram just make
+    // sure nothing falls through the cracks while he does that.
+    await notifyTelegram({ id, gateway, transactionDate, transferAmount, content, matchedLead });
     res.status(200).json({ success: true });
     return;
   }
