@@ -54,7 +54,7 @@ Tự chuyển khoản 2.000đ vào chính tài khoản MBBank 888888393988 với
 |---|---|
 | QR không hiện | Kiểm tra lại tham số `acc`/`bank` trong URL ảnh — báo em để chỉnh |
 | Webhook không nhận được gì | Chưa deploy, hoặc URL dán sai — xác nhận site đã live chưa |
-| Lỗi "Unauthorized" | `SEPAY_API_KEY` trong Vercel không khớp key trong dashboard SePay — tạo lại và dán lại cả 2 nơi |
+| Lỗi "Unauthorized" | Kiểm tra 2 việc: (1) `SEPAY_API_KEY` trong Vercel khớp key trong dashboard SePay, và (2) **quan trọng** — mục "Phương thức xác thực" trong SePay Webhooks phải để **API Key**, không phải HMAC-SHA256 (2 kiểu gửi header khác nhau, không tương thích với code hiện tại) |
 | Không thấy tin nhắn Telegram dù tiền đã vào | Kiểm tra `TELEGRAM_BOT_TOKEN`/`TELEGRAM_CHAT_ID` đã dán đúng và đã redeploy chưa; xem log Vercel để biết lỗi cụ thể |
 | Tiền vào nhưng không biết ai chuyển | Bot chỉ báo "có tiền vào" (số tiền, giờ, nội dung CK) — Huynh tự vào lịch sử giao dịch MBBank xem tên/SĐT người chuyển rồi nhắn Zalo xác nhận, phù hợp quy mô 9 người |
 
@@ -65,4 +65,5 @@ Webhook (`api/sepay-webhook.js`) giờ tự động gửi tin nhắn Telegram ch
 ## Trạng thái
 
 - [x] Đã lấy SEPAY_API_KEY, TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID và lưu vào Vercel
-- [x] Redeploy để nạp biến môi trường mới (commit này kích hoạt)
+- [x] Redeploy để nạp biến môi trường mới
+- [x] **Test thật thành công 2026-07-18** — chuyển 5.000đ, webhook nhận đúng, xác thực đúng, Telegram đã gửi. Hệ thống thanh toán tự động đã hoạt động đầy đủ.
