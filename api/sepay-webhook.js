@@ -61,23 +61,11 @@ module.exports = async (req, res) => {
   }
 
   // 1. Verify the API key SePay sends in the Authorization header.
+  // Confirmed working 2026-07-18: SePay dashboard auth method must be set to
+  // "API Key" (not HMAC-SHA256) for this header-based check to receive anything.
   const authHeader = req.headers['authorization'] || '';
   const envKey = process.env.SEPAY_API_KEY || '';
   const expected = `Apikey ${envKey}`;
-
-  // TEMP DIAGNOSTIC — remove once auth is confirmed working. Never logs the
-  // full secret: only presence/length and masked previews for comparison.
-  console.log('SePay auth debug:', {
-    envKeyPresent: Boolean(envKey),
-    envKeyLength: envKey.length,
-    envKeyPreview: envKey ? `${envKey.slice(0, 4)}...${envKey.slice(-4)}` : null,
-    receivedHeaderPresent: Boolean(authHeader),
-    receivedHeaderLength: authHeader.length,
-    receivedHeaderPreview: authHeader
-      ? `${authHeader.slice(0, 10)}...${authHeader.slice(-4)}`
-      : null,
-    allReceivedHeaderKeys: Object.keys(req.headers),
-  });
 
   if (!envKey || authHeader !== expected) {
     console.error('SePay webhook: invalid or missing API key');
