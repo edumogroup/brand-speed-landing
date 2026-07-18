@@ -18,11 +18,16 @@ module.exports = async (req, res) => {
     return;
   }
 
-  // Respond first so the buyer's browser isn't stuck waiting on Telegram's round-trip.
-  res.status(200).json({ success: true });
+  // Await both before responding — Vercel serverless functions can freeze/terminate
+  // right after the response is sent, killing any un-awaited "fire-and-forget" work
+  // in flight (this silently dropped notifications before). Run them concurrently
+  // so the buyer isn't stuck waiting on both round-trips back to back.
+  await Promise.all([
+    notifyTelegram({ name, phone, email, orderCode }),
+    saveToGoogleSheet({ name, phone, email, orderCode }),
+  ]);
 
-  notifyTelegram({ name, phone, email, orderCode });
-  saveToGoogleSheet({ name, phone, email, orderCode });
+  res.status(200).json({ success: true });
 };
 
 async function notifyTelegram({ name, phone, email, orderCode }) {

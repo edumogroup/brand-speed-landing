@@ -105,10 +105,12 @@ module.exports = async (req, res) => {
 
     // Because Founding Cohort is high-touch (9 seats, personal onboarding), we don't
     // auto-deliver anything — we just alert Huynh instantly so he can follow up 1:1.
-    // 4. Respond to SePay first so it doesn't wait on Telegram's round-trip...
+    // 4. Await the Telegram send BEFORE responding — Vercel serverless functions can
+    // freeze/terminate right after the response is sent, killing any un-awaited
+    // "fire-and-forget" work in flight. A Telegram call takes <1s, well within
+    // SePay's 30s response budget, so awaiting here is safe and reliable.
+    await notifyTelegram({ id, gateway, transactionDate, transferAmount, content });
     res.status(200).json({ success: true });
-    // ...then send the notification (fire-and-forget, doesn't block the ack above).
-    notifyTelegram({ id, gateway, transactionDate, transferAmount, content });
     return;
   }
 
