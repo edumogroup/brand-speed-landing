@@ -18,11 +18,13 @@
 
 const SHEET_SECRET = 'REPLACE_WITH_A_RANDOM_STRING'; // must match GOOGLE_SHEET_SECRET in Vercel
 const SHEET_NAME = 'Leads'; // tab name — script creates it if missing
+const SUBSCRIBERS_SHEET_NAME = 'Subscribers'; // "Chưa sẵn sàng?" email capture — separate tab
 
 const COLUMNS = [
   'timestamp', 'name', 'phone', 'email', 'orderCode', 'depositAmount',
   'paid', 'paidAt', 'reminderEmailId',
 ];
+const SUBSCRIBER_COLUMNS = ['timestamp', 'email'];
 
 function getSheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
@@ -30,6 +32,16 @@ function getSheet_() {
   if (!sheet) {
     sheet = ss.insertSheet(SHEET_NAME);
     sheet.appendRow(COLUMNS);
+  }
+  return sheet;
+}
+
+function getSubscribersSheet_() {
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getSheetByName(SUBSCRIBERS_SHEET_NAME);
+  if (!sheet) {
+    sheet = ss.insertSheet(SUBSCRIBERS_SHEET_NAME);
+    sheet.appendRow(SUBSCRIBER_COLUMNS);
   }
   return sheet;
 }
@@ -102,6 +114,11 @@ function doPost(e) {
       orderCode: values[COLUMNS.indexOf('orderCode')],
       reminderEmailId: values[COLUMNS.indexOf('reminderEmailId')],
     });
+  }
+
+  if (action === 'save_subscriber') {
+    getSubscribersSheet_().appendRow([new Date(), payload.email || '']);
+    return jsonResponse_({ success: true });
   }
 
   return jsonResponse_({ error: 'Unknown action' });

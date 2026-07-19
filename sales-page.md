@@ -9,7 +9,7 @@
 
 **Pre-headline:** Dành cho chủ doanh nghiệp nhỏ/coach tại Việt Nam — không rành công nghệ, không có thời gian mày mò AI
 
-**Headline:** Có Bộ Thương Hiệu + Website Chuyên Nghiệp Trong 14 Ngày — Không Cần Biết AI, Không Cần Thuê Agency
+**Headline:** Sở Hữu Ngay Bộ Thương Hiệu + Website Chuyên Nghiệp Trong 14 Ngày — Không Cần Biết AI, Không Cần Thuê Agency
 
 **Subheadline:** Cho chủ doanh nghiệp/coach muốn sở hữu thương hiệu bài bản mà không phải tự học công nghệ hay chờ agency vài tuần — có chuyên gia 12 năm kinh nghiệm trực tiếp làm cùng, không phải AI làm một mình.
 
@@ -69,7 +69,7 @@ Không phải "khóa học AI", không phải "thuê agency". BRAND SPEED giúp 
 
 **12 năm thiết kế thương hiệu & website — người trực tiếp đồng hành, không phải AI làm một mình**
 
-Tốt nghiệp chuyên ngành Thiết kế Đồ họa, Viện Đại học Mở Hà Nội. 12 năm gắn bó với nghề, hiện là Giám đốc thương hiệu của Moza Media, từng trực tiếp thiết kế và quản lý dự án cho hàng trăm thương hiệu — trong đó có **Tuấn Tú Travel**, cùng nhiều dự án bất động sản, công nghệ, F&B, tài chính.
+Tốt nghiệp chuyên ngành Thiết kế Đồ họa, Viện Đại học Mở Hà Nội. 12 năm gắn bó với nghề, hiện là Giám đốc thương hiệu của Moza Media, từng trực tiếp thiết kế và quản lý dự án cho hàng trăm thương hiệu, cùng nhiều dự án bất động sản, làm đẹp, công nghệ, F&B, tài chính, đào tạo,..
 
 Sau nhiều năm làm trong môi trường agency, tôi nhận ra điều mình muốn nhất không phải là làm nhiều dự án hơn, mà là đồng hành sâu hơn với từng khách hàng — và chủ động được thời gian của chính mình. Đó là lý do tôi trở thành người tư vấn độc lập.
 

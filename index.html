@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BRAND SPEED - Có Bộ Thương Hiệu + Website Chuyên Nghiệp Trong 14 Ngày | Hoàng Quốc Huynh</title>
+  <title>BRAND SPEED - Sở Hữu Ngay Bộ Thương Hiệu + Website Chuyên Nghiệp Trong 14 Ngày | Hoàng Quốc Huynh</title>
   <meta name="description" content="Chương trình BRAND SPEED giúp chủ doanh nghiệp nhỏ và coach tại Việt Nam có bộ thương hiệu + website chuyên nghiệp trong 14 ngày, có chuyên gia 12 năm kinh nghiệm đồng hành trực tiếp — không cần biết công nghệ. Founding Cohort chỉ 9 suất.">
   <meta property="og:title" content="BRAND SPEED — Founding Cohort chỉ 9 suất">
-  <meta property="og:description" content="Có bộ thương hiệu + website chuyên nghiệp trong 14 ngày, có chuyên gia 12 năm kinh nghiệm đồng hành trực tiếp — không cần biết công nghệ.">
+  <meta property="og:description" content="Sở hữu ngay bộ thương hiệu + website chuyên nghiệp trong 14 ngày, có chuyên gia 12 năm kinh nghiệm đồng hành trực tiếp — không cần biết công nghệ.">
   <meta property="og:image" content="">
   <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230B1B2B'/%3E%3Ctext x='50' y='68' font-size='55' text-anchor='middle' fill='%23F59E0B' font-family='Georgia,serif'%3EB%3C/text%3E%3C/svg%3E">
@@ -146,6 +146,47 @@
     .cta-glow { animation: cta-pulse 2.4s ease-out infinite; }
     .cta-glow:hover { animation-play-state: paused; transform: translateY(-2px) scale(1.02); }
 
+    /* Blurred project-photo texture behind dark sections — subtle depth, not distracting.
+       Sits under the section's existing gradient/overlay so text stays fully legible. */
+    .bg-project-blur {
+      position: absolute;
+      inset: -20px; /* overscan so the blur edge never shows a hard border */
+      background-size: cover;
+      background-position: center;
+      filter: blur(18px) saturate(80%);
+      opacity: 0.18;
+      pointer-events: none;
+    }
+
+    /* Client logo marquee — infinite auto-scroll, left to right motion (track moves right-to-left) */
+    .logo-marquee {
+      width: 100%;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+      mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+    }
+    .logo-track {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      width: max-content;
+      animation: logo-scroll 40s linear infinite;
+    }
+    .logo-track:hover { animation-play-state: paused; }
+    .logo-chip {
+      height: 4.5rem;
+      width: 9rem;
+      object-fit: contain;
+      background: #ffffff;
+      border-radius: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      flex-shrink: 0;
+    }
+    @keyframes logo-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
     /* Checkout step indicator dots */
     .step-dot {
       width: 1.75rem; height: 1.75rem; border-radius: 9999px;
@@ -179,13 +220,14 @@
 
 <!-- HERO — dark navy gradient for strong above-fold impact -->
 <section class="relative pt-40 pb-28 px-6 fade-section overflow-hidden bg-gradient-to-br from-navydeep via-[#2d1b4e] to-[#24466f]">
+  <div class="bg-project-blur" style="background-image:url('assets/backgrounds/bg-hero.jpg');"></div>
   <div class="hero-blob"></div>
   <div class="hero-blob-2"></div>
   <div class="max-w-3xl mx-auto text-center relative">
     <p class="text-sm font-semibold text-accent uppercase tracking-widest mb-6">Dành cho chủ doanh nghiệp nhỏ / coach tại Việt Nam — không rành công nghệ</p>
 
     <h1 class="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight tracking-tight mb-8">
-      Có Bộ Thương Hiệu + Website Chuyên Nghiệp Trong 14 Ngày
+      Sở Hữu Ngay Bộ Thương Hiệu + Website Chuyên Nghiệp Trong 14 Ngày
     </h1>
 
     <div class="line-divider"></div>
@@ -344,8 +386,8 @@
 
 
 <!-- CLIENT PROOF (real numbers + real client names, no fabricated quotes) — dark navy band for visual punch -->
-<section class="py-16 px-6 bg-navydeep fade-section">
-  <div class="max-w-3xl mx-auto text-center">
+<section class="py-16 bg-navydeep fade-section overflow-hidden">
+  <div class="max-w-3xl mx-auto text-center px-6">
     <p class="text-sm font-semibold text-accent uppercase tracking-widest mb-8">Uy Tín</p>
     <div class="grid grid-cols-3 gap-6 mb-10">
       <div>
@@ -361,10 +403,36 @@
         <p class="text-sm text-gray-300 mt-1">dự án đã bàn giao</p>
       </div>
     </div>
-    <p class="text-sm text-gray-400 mb-4">Đã đồng hành cùng</p>
-    <p class="text-gray-200 leading-loose">
-      Tuấn Tú Travel &nbsp;·&nbsp; Hateco ICT &nbsp;·&nbsp; Nation LED &nbsp;·&nbsp; Hoa Vỹ &nbsp;·&nbsp; BĐS Hùng Vương &nbsp;·&nbsp; 123Fund &nbsp;·&nbsp; Glink &nbsp;·&nbsp; Green World &nbsp;·&nbsp; VIC Group &nbsp;·&nbsp; Level 9 &nbsp;·&nbsp; Tân Hoàn Mỹ
-    </p>
+    <p class="text-sm text-gray-400 mb-6">Đã đồng hành cùng</p>
+  </div>
+
+  <!-- Logo marquee — real client logos, auto-scroll left, full-bleed -->
+  <div class="logo-marquee">
+    <div class="logo-track">
+      <img src="assets/logos/01.jpg" alt="D'Lux Lighting" class="logo-chip">
+      <img src="assets/logos/02.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/03.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/04.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/05.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/06.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/07.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/08.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/09.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/10.jpg" alt="Khách hàng BRAND SPEED" class="logo-chip">
+      <img src="assets/logos/11.jpg" alt="Tuấn Tú Travel" class="logo-chip">
+      <!-- duplicate set — required for a seamless infinite loop -->
+      <img src="assets/logos/01.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/02.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/03.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/04.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/05.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/06.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/07.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/08.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/09.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/10.jpg" alt="" aria-hidden="true" class="logo-chip">
+      <img src="assets/logos/11.jpg" alt="" aria-hidden="true" class="logo-chip">
+    </div>
   </div>
 </section>
 
@@ -483,6 +551,7 @@
 
 <!-- ABOUT THE CREATOR — dark navy band, mirrors hero, for maximum emphasis on trust -->
 <section id="about" class="relative py-24 px-6 fade-section overflow-hidden bg-gradient-to-br from-navydeep via-[#2d1b4e] to-navymid">
+  <div class="bg-project-blur" style="background-image:url('assets/backgrounds/bg-about.jpg');"></div>
   <div class="hero-blob"></div>
   <div class="max-w-3xl mx-auto relative">
     <div class="md:flex gap-10 items-start">
@@ -495,7 +564,7 @@
       <div>
         <p class="text-sm font-semibold text-accent uppercase tracking-widest mb-4">Người Đồng Hành Cùng Anh/Chị</p>
         <h3 class="font-serif text-2xl md:text-3xl font-bold text-white mb-4">Hoàng Quốc Huynh</h3>
-        <p class="text-gray-200 leading-relaxed mb-4">Tốt nghiệp chuyên ngành Thiết kế Đồ họa, Viện Đại học Mở Hà Nội. 12 năm gắn bó với nghề, hiện là Giám đốc thương hiệu của Moza Media, tôi từng trực tiếp thiết kế và quản lý dự án cho hàng trăm thương hiệu — trong đó có Tuấn Tú Travel, cùng nhiều dự án bất động sản, công nghệ, F&amp;B, tài chính.</p>
+        <p class="text-gray-200 leading-relaxed mb-4">Tốt nghiệp chuyên ngành Thiết kế Đồ họa, Viện Đại học Mở Hà Nội. 12 năm gắn bó với nghề, hiện là Giám đốc thương hiệu của Moza Media, tôi từng trực tiếp thiết kế và quản lý dự án cho hàng trăm thương hiệu, cùng nhiều dự án bất động sản, làm đẹp, công nghệ, F&amp;B, tài chính, đào tạo,..</p>
         <p class="text-gray-200 leading-relaxed mb-6">Sau nhiều năm làm trong môi trường agency, tôi nhận ra điều mình muốn nhất không phải là làm nhiều dự án hơn, mà là đồng hành sâu hơn với từng khách hàng. Tôi tạo ra BRAND SPEED để mang đúng cách làm đó đến với anh/chị — nhanh hơn, chi phí thấp hơn nhờ AI, nhưng vẫn có người thật đứng sau mỗi quyết định.</p>
 
         <div class="flex flex-wrap gap-6 text-sm text-gray-300">
@@ -513,6 +582,7 @@
 
 <!-- PRICING — dark navy band matching hero, recommended plan pops as a bright card -->
 <section id="pricing" class="relative py-24 px-6 fade-section overflow-hidden bg-gradient-to-br from-[#2d1b4e] via-navymid to-navydeep">
+  <div class="bg-project-blur" style="background-image:url('assets/backgrounds/bg-pricing.jpg');"></div>
   <div class="hero-blob"></div>
   <div class="max-w-4xl mx-auto relative">
     <div class="text-center mb-16">
@@ -690,12 +760,13 @@
     <h2 class="font-serif text-2xl md:text-3xl font-bold text-dark mb-4">Để Lại Thông Tin, Nhận Cập Nhật Thật</h2>
     <p class="text-primary mb-8">Nhận thông báo ngay khi Founding Cohort mở lại, hoặc khi có case study đầu tiên từ 9 học viên sáng lập.</p>
 
-    <form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto" onsubmit="return false;">
-      <input type="email" placeholder="Email của anh/chị" class="flex-1 px-4 py-3 border border-border bg-surface text-dark placeholder:text-muted focus:outline-none focus:border-accent transition-colors" required>
-      <button type="submit" class="bg-accent text-white px-6 py-3 font-medium hover:bg-[#C2740A] transition-colors cursor-pointer whitespace-nowrap">
+    <form id="subscribe-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+      <input type="email" id="subscribe-email" placeholder="Email của anh/chị" class="flex-1 px-4 py-3 border border-border bg-surface text-dark placeholder:text-muted focus:outline-none focus:border-accent transition-colors" required>
+      <button type="submit" id="subscribe-submit" class="bg-accent text-white px-6 py-3 font-medium hover:bg-[#C2740A] transition-colors cursor-pointer whitespace-nowrap">
         Gửi Cho Tôi
       </button>
     </form>
+    <p id="subscribe-message" class="mt-3 text-sm hidden"></p>
 
     <p class="mt-4 text-xs text-muted">Không spam. Chỉ gửi khi có cập nhật thật.</p>
   </div>
@@ -704,6 +775,7 @@
 
 <!-- FINAL CTA + FOOTER — dark navy closing band, mirrors hero for a strong bookend -->
 <section class="relative py-24 px-6 fade-section overflow-hidden bg-gradient-to-br from-[#24466f] via-navymid to-navydeep">
+  <div class="bg-project-blur" style="background-image:url('assets/backgrounds/bg-final-cta.jpg');"></div>
   <div class="max-w-3xl mx-auto text-center relative">
     <h2 class="font-serif text-3xl md:text-4xl font-bold text-white mb-6">Founding Cohort Chỉ Còn 9 Suất</h2>
     <p class="text-lg text-gray-200 mb-10 max-w-xl mx-auto">Khi đăng ký hôm nay: bộ thương hiệu + website hoàn chỉnh sau 8 tuần, chuyên gia 12 năm kinh nghiệm đồng hành trực tiếp, cam kết đo lường được — không phải lời hứa suông.</p>
@@ -813,6 +885,47 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     step1.classList.remove('hidden');
     dot2.classList.remove('step-dot-active');
     dot1.classList.add('step-dot-active');
+  });
+})();
+
+// "Chưa sẵn sàng?" email-only capture
+(function () {
+  const form = document.getElementById('subscribe-form');
+  if (!form) return;
+
+  const emailInput = document.getElementById('subscribe-email');
+  const submitBtn = document.getElementById('subscribe-submit');
+  const messageEl = document.getElementById('subscribe-message');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!email.includes('@')) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Đang gửi...';
+    messageEl.classList.add('hidden');
+
+    try {
+      const resp = await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+      if (!resp.ok) throw new Error('subscribe failed');
+
+      messageEl.textContent = '✓ Đã ghi nhận! Anh/chị sẽ nhận email khi có cập nhật.';
+      messageEl.className = 'mt-3 text-sm text-emerald-600';
+      form.reset();
+    } catch (err) {
+      console.error('subscribe error:', err);
+      messageEl.textContent = 'Có lỗi xảy ra, anh/chị thử lại giúp em nhé.';
+      messageEl.className = 'mt-3 text-sm text-red-600';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Gửi Cho Tôi';
+      messageEl.classList.remove('hidden');
+    }
   });
 })();
 
